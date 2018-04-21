@@ -4,7 +4,7 @@ import json
 from PIL import Image
 
 if __name__ == "__main__":
-    fileName = 'test2.jpg'
+    fileName = 'test2.jpg' # nombre en la nube de la imagen a modifica
     bucket = 'eafit-team2-input'
     client = boto3.client('rekognition', 'us-east-1')
     s3 = boto3.resource('s3')
@@ -65,13 +65,15 @@ if __name__ == "__main__":
 
 
 
+    image_emotion_name = emocion_final + '.png'
     try:
-        s3.Bucket(bucket).download_file(fileName, 'local.jpg')
+        s3.Bucket(bucket).download_file(image_emotion_name,'emotion_local.png')
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == "404":
             print("The object does not exist.")
         else:
             raise
+    
 
     til = Image.open('local.jpg')
     image_width, image_height = til.size
@@ -91,7 +93,7 @@ if __name__ == "__main__":
     
     # pos1 = width_ *
 
-    icon = Image.open('emociones/confuso.png')
+    icon = Image.open('emotion_local.png')
     icon.thumbnail(resize, Image.ANTIALIAS)
     icon.save("salida_.png")
     til.paste(icon, (x1,y1), icon)
