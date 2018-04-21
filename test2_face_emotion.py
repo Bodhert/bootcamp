@@ -4,7 +4,7 @@ import json
 from PIL import Image
 
 if __name__ == "__main__":
-    fileName = 'test2.jpg' # nombre en la nube de la imagen a modifica
+    fileName = 'test7.jpg' # nombre en la nube de la imagen a modifica
     bucket = 'eafit-team2-input'
     client = boto3.client('rekognition', 'us-east-1')
     s3 = boto3.resource('s3')
@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
     icon = Image.open('emotion_local.png')
     icon.thumbnail(resize, Image.ANTIALIAS)
-    icon.save("salida_.png")
+    icon.save('emotion_local.png')
     til.paste(icon, (x1,y1), icon)
     til.save("result.png")
 
