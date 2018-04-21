@@ -8,7 +8,7 @@ if __name__ == "__main__":
     bucket = 'eafit-team2-input'
     client = boto3.client('rekognition', 'us-east-1')
     s3 = boto3.resource('s3')
-
+ 
     response = client.detect_faces(
         Image={'S3Object': {'Bucket': bucket, 'Name': fileName}}, Attributes=['ALL'])
 
